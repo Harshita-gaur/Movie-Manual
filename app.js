@@ -1,4 +1,4 @@
-let api="https://www.omdbapi.com/?apikey=6c3ce92c&t="
+const api="https://www.omdbapi.com/?apikey=6c3ce92c&t="
 
 function handleEnterKey(event) {
     if (event.key === "Enter") {
@@ -8,17 +8,26 @@ function handleEnterKey(event) {
 // Add event listener for Enter key
 document.getElementById('moviename').addEventListener('keydown', handleEnterKey);
 
+function toggleLoading(isLoading) {
+    // Show or hide loading spinner
+    const loadingSpinner = document.getElementById('loading');
+    loadingSpinner.style.display = isLoading ? "block" : "none";
+}
+
 function searchmovie(){
     document.getElementById('details').style.display="inline"
     let name=document.getElementById('moviename').value
     let query = api + name
     fetch(query).then((response) => {
-            // Check if the response is ok (status code 200-299)
             if (!response.ok) {
                 throw new Error('Network response was not ok: ' + response.statusText);
             }
             return response.json();
         }).then((data)=>{
+        if (data.Response === "False") {
+                alert(data.Error); 
+                return; 
+            }
         console.log(data)
         title.innerText=data.Title
         Runtime.innerText=data.Runtime
