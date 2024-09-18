@@ -7,3 +7,4 @@ Search trendy,nostalgic or cringy movies all you want
 
 Uses API to fetch data about a movie
 Also handles enter key as a submit event
+Involves error cathcing and handling so that the user gets proper feedback as response and not undefined
