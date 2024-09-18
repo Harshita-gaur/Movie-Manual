@@ -12,9 +12,13 @@ function searchmovie(){
     document.getElementById('details').style.display="inline"
     let name=document.getElementById('moviename').value
     let query = api + name
-    fetch(query).then((data)=>{
-        return data.json()
-    }).then((data)=>{
+    fetch(query).then((response) => {
+            // Check if the response is ok (status code 200-299)
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        }).then((data)=>{
         console.log(data)
         title.innerText=data.Title
         Runtime.innerText=data.Runtime
@@ -32,4 +36,8 @@ function searchmovie(){
         production.innerText=data.Production
         poster.src=data.Poster
     })
+    .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+        alert('Error fetching movie data: ' + error.message); // Alert the user about the error
+    });
 }
