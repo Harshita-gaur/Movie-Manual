@@ -1,5 +1,13 @@
 let api="https://www.omdbapi.com/?apikey=6c3ce92c&t="
 
+function handleEnterKey(event) {
+    if (event.key === "Enter") {
+        document.getElementById('btn').click();
+    }
+}
+// Add event listener for Enter key
+document.getElementById('moviename').addEventListener('keydown', handleEnterKey);
+
 function searchmovie(){
     document.getElementById('details').style.display="inline"
     let name=document.getElementById('moviename').value
